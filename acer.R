@@ -1,0 +1,22 @@
+library(rvest)
+library(dplyr)
+library(robotstxt)
+library(stringr)
+
+url <- "https://www.gadgets360.com/laptops/acer-laptops"
+path = paths_allowed(url)
+web<- read_html(url)
+View(web)
+lab = web%>% html_nodes("#allplist ._hd a")  %>% html_text()                   
+View(lab)
+ds = web%>% html_nodes("._lpdsd:nth-child(1)") %>% html_text() 
+View(ds)
+os = web%>% html_nodes("._lpdsd:nth-child(2)")  %>% html_text() 
+View(os)
+pr= web%>% html_nodes("._flspc") %>% html_text() 
+View(pr)
+labtop= data.frame(lab,ds,os,pr)
+View(labtop)
+
+write.csv(labtop,"acer.csv")
+str(lapto)
